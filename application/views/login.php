@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				    </label>
 				</div>
 			  	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
+			  	<label>Don't have an account yet? <a href="/Login/register">Register now</a></label>
 				<div style="border: black; margin-top: 20px; border-color: #e5e5e5;">
 					<label>
 				      	Sign in with
@@ -43,9 +43,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</span>
 						</a>
 				    </div>
-
-
 				</div>
+
 
 			</form>
 		</div>
