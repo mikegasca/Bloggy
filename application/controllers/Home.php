@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Home extends CI_Controller {
 
 	public function __construct()
 	{
@@ -17,26 +17,30 @@ class Login extends CI_Controller {
 	 */
 	public function index()
 	{
-		if($this->session->userdata('id'))
+
+		if(empty($this->session->user))
 		{
-			redirect(base_url()."/Home");
-		}else{
-			$this->load->view('layout/header_v');
-			$this->load->view('login_v');
+			redirect(base_url());
 		}
+		$data['user']=$this->session->user;
+		$this->load->view('layout/header_v',$data);
+		$this->load->view('layout/menu_v',$data);
+		$this->load->view('home_v',$data);
+		$this->load->view('layout/footer_v',$data);
+
 
 	}
 	public function register()
 	{
-		$this->load->view('layout/header_v');
-		$this->load->view('register_v');
+		$this->load->view('layout/header');
+		$this->load->view('register');
 	}
 
 	public function create()
 	{
-		$PST_name=$this->security->xss_clean(strip_tags($this->input->post('name')));
-		$PST_email=$this->security->xss_clean(strip_tags($this->input->post('email')));
-		$PST_password=$this->security->xss_clean(strip_tags($this->input->post('password')));
+		$PST_name=$this->input->post('name');
+		$PST_email=$this->input->post('email');
+		$PST_password=$this->input->post('password');
 		$date=date('Y-m-d H:i:s');
 		$user=$this->Users_model->create_user($PST_name,$PST_email,$PST_password,$date);
 
@@ -48,24 +52,29 @@ class Login extends CI_Controller {
 		$PST_email = $this->security->xss_clean(strip_tags($this->input->post('email')));
 		$PST_password = $this->security->xss_clean(strip_tags($this->input->post('password')));
 
-		$user=$this->Users_model->login($PST_email, $PST_password);
 
+		$user=$this->Users_model->login($PST_email, $PST_password);
+			//$user['success']
 		if (!empty($user['success']))
 		{
-			redirect(base_url()."Home");
+			redirect(base_url()."/Home/welcome");
 		}else{
 			$data['message']=$user['message'];
-			$data['message_alert']='danger';
-			$this->load->view('layout/header_v');
-			$this->load->view('login_v',$data);
+			$this->load->view('layout/header');
+			$this->load->view('login',$data);
+
 		}
+
+		//$date=date('Y-m-d H:i:s');
+		//$user=$this->Users_model->create_user($PST_name,$PST_email,$PST_password,$date);
+		//redirect(base_url());
 
 	}
 	public function logout()
 	{
 		$this->session->sess_destroy();
         session_destroy();
-        redirect(base_url());
+        redirect(base_url()."index.php/Principal");
 	}
 
 }

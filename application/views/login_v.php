@@ -1,28 +1,21 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Login</title>
-	 <link href="/assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	 <meta name="theme-color" content="#563d7c">
 
-
-    <!-- Custom styles for this template -->
-    <link href="/assets/css/login.css" rel="stylesheet">
-
-</head>
-<body class="text-center">
 	<div class="container">
     	<div class="form-container flip" align="center">
-
-			<form class="col-md-9 col-lg-9 col-xs-12 login-form">
+			<form class="col-md-9 col-lg-6 col-xs-12 login-form"  method="post" action="/Login/login" name="form_login" id="form_login">
 		  		<img class="col-md-12 col-lg-9 col-xs-12" src="/assets/imagenes/logo.png" alt="" width="100%" >
-		  		<label for="inputEmail" class="sr-only">Email address</label>
-		  		<input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-		  		<label for="inputPassword" class="sr-only">Password</label>
-		  		<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+		  		<?php if(!empty($message)){?>
+			  		<div class="alert alert-<?php echo $message_alert; ?>" role="alert">
+					  <?php echo $message; ?>
+					</div>
+				<?php } ?>
+				<div class="col-md-12 col-lg-12 col-xs-12 form-group">
+			  		<label for="inputEmail" class="sr-only">Email address</label>
+			  		<input type="email" id="email" name="email" class="form-control" placeholder="Email address" required autofocus>
+			  	</div>
+			  	<div class="col-md-12 col-lg-12 col-xs-12 form-group">
+				  	<label for="inputPassword" class="sr-only">Password</label>
+			  		<input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+			  	</div>
 			  	<div class="checkbox ">
 				    <label>
 				      	<input type="checkbox" value="remember-me"> Remember me
