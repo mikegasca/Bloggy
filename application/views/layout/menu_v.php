@@ -14,8 +14,9 @@
           		<a class="nav-link" href="#">This Month</a>
         	</li>
       	</ul>
-       	<div class="col-md-1 col-lg-1 col-xs-1" >
+       	<div class="col-md-2 col-lg-2 col-xs-2" >
        	  	<label><?php echo $user['name']; ?></label>
+          		<a class="btn  btn-outline-dark " href="/Post/new">New Post</a>
        	</div>
       	<form class="form-inline mt-2 mt-md-0">
         	<a class="btn  btn-outline-dark " href="/Login/logout" type="submit">Logout</a>
